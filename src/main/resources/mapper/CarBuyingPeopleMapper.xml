@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cyb.goodsms.dao.CarBuyingPeopleMapper" >
+  <resultMap id="BaseResultMap" type="com.cyb.goodsms.domain.CarBuyingPeople" >
+    <constructor >
+      <arg column="id" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="buying_people_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="phone" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="description" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="buy_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="category" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="profit" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="staffNo" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="create_date_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="update_date_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cyb.goodsms.domain.CarBuyingPeople" >
+    select
+    *
+    from car_buying_people where 1 = 1
+    <if test="record.buyingPeopleName != null" >
+      and buying_people_name like concat('%',#{record.buyingPeopleName, jdbcType=VARCHAR}, '%')
+    </if>
+    order by update_date_time desc, create_date_time desc
+    <if test="pagination != null and pagination.pageIndex != null and pagination.limit != null">
+      limit #{pagination.pageIndex, jdbcType=INTEGER}, #{pagination.limit, jdbcType=INTEGER}
+    </if>
+  </select>
+
+  <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select * from car_buying_people where id = #{id, jdbcType=VARCHAR};
+  </select>
+
+  <delete id="deleteById" parameterType="java.lang.String" >
+    delete from car_buying_people where id = #{id, jdbcType=VARCHAR}
+  </delete>
+
+  <insert id="insert" parameterType="com.cyb.goodsms.domain.CarBuyingPeople" >
+    insert into car_buying_people (id, buying_people_name, phone, 
+      description, buy_name, price, 
+      category, profit, staffNo, create_date_time, update_date_time)
+    values (#{id,jdbcType=VARCHAR}, #{buyingPeopleName,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{buyName,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL},
+      #{category,jdbcType=VARCHAR}, #{profit,jdbcType=DECIMAL}, #{staffNo, jdbcType=VARCHAR},
+      #{createDateTime,jdbcType=TIMESTAMP},
+      #{updateDateTime,jdbcType=TIMESTAMP})
+  </insert>
+
+  <select id="countByExample" parameterType="com.cyb.goodsms.domain.CarBuyingPeople" resultType="java.lang.Integer" >
+    select count(*) from car_buying_people
+    <if test="buyingPeopleName != null" >
+      and buying_people_name like concat('%',#{buyingPeopleName, jdbcType=VARCHAR}, '%')
+    </if>
+  </select>
+
+  <update id="updateById" parameterType="com.cyb.goodsms.domain.CarBuyingPeople" >
+    update car_buying_people
+    <set >
+      <if test="record.buyingPeopleName != null" >
+        buying_people_name = #{record.buyingPeopleName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null" >
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null" >
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buyName != null" >
+        buy_name = #{record.buyName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.price != null" >
+        price = #{record.price,jdbcType=DECIMAL},
+      </if>
+      <if test="record.category != null" >
+        category = #{record.category,jdbcType=VARCHAR},
+      </if>
+      <if test="record.profit != null" >
+        profit = #{record.profit,jdbcType=DECIMAL},
+      </if>
+      <if test="record.staffNo != null" >
+        staffNo = #{record.staffNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDateTime != null" >
+        create_date_time = #{record.createDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateDateTime != null" >
+        update_date_time = #{record.updateDateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{record.id,jdbcType=VARCHAR}
+  </update>
+</mapper>

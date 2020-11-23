@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cyb.goodsms.dao.ParamesMapper">
+  <resultMap id="BaseResultMap" type="com.cyb.goodsms.domain.Parames">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="value" jdbcType="VARCHAR" property="value" />
+    <result column="group" jdbcType="VARCHAR" property="group" />
+    <result column="order" jdbcType="INTEGER" property="order" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+
+  <select id="selectByParames" resultMap="BaseResultMap" parameterType="com.cyb.goodsms.domain.Parames">
+    select *
+    from parames p
+    where 1 = 1
+    <if test="name != null and name != ''">
+      and p.name = #{name,jdbcType=VARCHAR}
+    </if>
+    <if test="value != null and value != ''">
+      and p.value = #{value,jdbcType=VARCHAR}
+    </if>
+    <if test="group != null and group != ''">
+      and p.group = #{group,jdbcType=VARCHAR}
+    </if>
+    order by p.order asc
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select *
+    from parames
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectOneByName" resultMap="BaseResultMap">
+    select *
+    from parames
+    where name = #{name,jdbcType=VARCHAR}
+  </select>
+
+</mapper>
