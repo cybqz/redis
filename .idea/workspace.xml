@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="6a5c14a9-d3fe-4ed1-9b2a-e136d5434244" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="S:/Java/maven/apache-maven-3.5.4" />
+        <option name="userSettingsFile" value="S:\Java\maven\apache-maven-3.5.4\conf\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="settings.editor.selected.configurable" value="MavenSettings" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6a5c14a9-d3fe-4ed1-9b2a-e136d5434244" name="Default Changelist" comment="" />
+      <created>1606141999028</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1606141999028</updated>
+      <workItem from="1606142000079" duration="1060000" />
+    </task>
+    <task id="LOCAL-00001" summary="初始化提交">
+      <created>1606142411845</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1606142411845</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="初始化提交" />
+    <option name="LAST_COMMIT_MESSAGE" value="初始化提交" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="295" y="0" key="CommitChangelistDialog2" timestamp="1606142406506">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="295" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1606142406506" />
+    <state x="495" y="108" key="FileChooserDialogImpl" timestamp="1606142203968">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="495" y="108" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1606142203968" />
+    <state x="175" y="0" key="SettingsEditor" timestamp="1606142206842">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="175" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1606142206842" />
+    <state x="261" y="64" key="Vcs.Push.Dialog.v2" timestamp="1606142841446">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="261" y="64" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1606142841446" />
+  </component>
+</project>
