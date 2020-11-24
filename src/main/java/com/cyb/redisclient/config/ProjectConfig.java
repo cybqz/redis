@@ -1,4 +1,4 @@
-package com.cyb.goodsms.config;
+package com.cyb.redisclient.config;
 
 import org.apache.catalina.connector.Connector;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;

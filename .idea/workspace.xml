@@ -5,32 +5,102 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6a5c14a9-d3fe-4ed1-9b2a-e136d5434244" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cyb/goodsms/GoodsMSApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cyb/redisclient/RedisClientApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cyb/goodsms/common/Constant.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cyb/goodsms/common/IndexController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cyb/goodsms/common/UploadController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cyb/goodsms/config/MyWebAppConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cyb/redisclient/config/MyWebAppConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cyb/goodsms/config/ProjectConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cyb/redisclient/config/ProjectConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cyb/goodsms/controller/CustomerInforController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cyb/goodsms/controller/LoginController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cyb/goodsms/controller/ParamesController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cyb/goodsms/controller/RegisterController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cyb/goodsms/controller/SaleController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cyb/goodsms/controller/StaffController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cyb/goodsms/controller/StockController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cyb/goodsms/controller/UserController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cyb/goodsms/dao/CarBuyingPeopleMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cyb/goodsms/dao/CustomerInfoMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cyb/goodsms/dao/ParamesMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cyb/goodsms/dao/StaffMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cyb/goodsms/dao/StockMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cyb/goodsms/domain/CarBuyingPeople.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cyb/goodsms/domain/CustomerInfo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cyb/goodsms/domain/Parames.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cyb/goodsms/domain/Staff.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cyb/goodsms/domain/Stock.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cyb/goodsms/interceptor/CorsConfigurerAdapter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cyb/goodsms/service/ParamesServices.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cyb/goodsms/service/impl/ParamesServicesImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cyb/goodsms/utils/MyUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cyb/redisclient/util/MyUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cyb/goodsms/vo/RolePermissionVO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cyb/goodsms/vo/UserCreateVO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cyb/goodsms/vo/UserRolePermissionVO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/generatorConfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/generatorConfig.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/CarBuyingPeopleMapper.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/CustomerInfoMapper.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/ParamesMapper.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/StaffMapper.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/stockMapper.xml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
-        <option name="mavenHome" value="S:/Java/maven/apache-maven-3.5.4" />
+        <option name="mavenHome" value="S:\Java\maven\apache-maven-3.5.4" />
         <option name="userSettingsFile" value="S:\Java\maven\apache-maven-3.5.4\conf\settings.xml" />
       </MavenGeneralSettings>
     </option>
+  </component>
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="settings.editor.selected.configurable" value="MavenSettings" />
     <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GoodsMSApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="cyb-redis-client" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.cyb.redisclient.RedisClientApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -56,6 +126,7 @@
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="初始化提交" />
     <option name="LAST_COMMIT_MESSAGE" value="初始化提交" />
   </component>
@@ -68,6 +139,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="495" y="108" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1606142203968" />
+    <state x="183" y="0" key="Maven.ArtifactSearchDialog" timestamp="1606224965957">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="183" y="0" key="Maven.ArtifactSearchDialog/0.0.1536.824@0.0.1536.824" timestamp="1606224965957" />
     <state x="175" y="0" key="SettingsEditor" timestamp="1606142206842">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -76,5 +151,9 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="261" y="64" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1606142841446" />
+    <state x="20" y="214" width="1350" height="638" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1606226136817">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="20" y="214" width="1350" height="638" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1536.824@0.0.1536.824" timestamp="1606226136817" />
   </component>
 </project>
