@@ -1,3 +1,33 @@
+debug: false
+
+web:
+  upload-path: F:/log/
+
+server:
+   port: 9090
+   tomcat:
+     uri-encoding: UTF-8
+   servlet:
+     context-path: /cybredis
 spring:
-  profiles:
-    active: dev
+  devtools:
+    restart:
+      enabled: true
+  mvc:
+    view:
+      prefix: /WEB-INF/
+      suffix: .jsp
+  application:
+    name: cybredis
+  security:
+    user:
+      name: admin
+      password: admin
+      roles: root
+
+logging:
+  level:
+    com:
+      cyb:
+        blogserver:
+          dao: debug
