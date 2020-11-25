@@ -1,18 +1,3 @@
-/*
- * Copyright 2011-2014 the original author or authors.
- * 
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * 
- *      http://www.apache.org/licenses/LICENSE-2.0
- * 
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.cyb.redisclient.util.redis;
 
 import java.util.Collection;
@@ -21,8 +6,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-
 import org.springframework.dao.DataAccessException;
+import org.springframework.data.redis.connection.BitFieldSubCommands;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -36,7 +21,7 @@ import org.springframework.data.redis.core.ValueOperations;
  * @author Jennifer Hickey
  * @author Christoph Strobl
  */
-class DefaultValueOperations<K, V> extends AbstractOperations<K, V> implements ValueOperations<K, V> {
+public class DefaultValueOperations<K, V> extends AbstractOperations<K, V> implements ValueOperations<K, V> {
 
 	DefaultValueOperations(RedisTemplate<K, V> template) {
 		super(template);
@@ -90,6 +75,16 @@ class DefaultValueOperations<K, V> extends AbstractOperations<K, V> implements V
 		}, true);
 	}
 
+	@Override
+	public Long decrement(K k) {
+		return null;
+	}
+
+	@Override
+	public Long decrement(K k, long l) {
+		return null;
+	}
+
 	public Integer append(K key, String value) {
 		final byte[] rawKey = rawKey(key);
 		final byte[] rawString = rawString(value);
@@ -139,6 +134,11 @@ class DefaultValueOperations<K, V> extends AbstractOperations<K, V> implements V
 		}, true);
 
 		return deserializeValues(rawValues);
+	}
+
+	@Override
+	public Long increment(K k) {
+		return null;
 	}
 
 	public void multiSet(Map<? extends K, ? extends V> m) {
@@ -243,6 +243,21 @@ class DefaultValueOperations<K, V> extends AbstractOperations<K, V> implements V
 		}, true);
 	}
 
+	@Override
+	public Boolean setIfAbsent(K k, V v, long l, TimeUnit timeUnit) {
+		return null;
+	}
+
+	@Override
+	public Boolean setIfPresent(K k, V v) {
+		return null;
+	}
+
+	@Override
+	public Boolean setIfPresent(K k, V v, long l, TimeUnit timeUnit) {
+		return null;
+	}
+
 	public void set(K key, final V value, final long offset) {
 		final byte[] rawKey = rawKey(key);
 		final byte[] rawValue = rawValue(value);
@@ -267,5 +282,20 @@ class DefaultValueOperations<K, V> extends AbstractOperations<K, V> implements V
 				return connection.strLen(rawKey);
 			}
 		}, true);
+	}
+
+	@Override
+	public Boolean setBit(K k, long l, boolean b) {
+		return null;
+	}
+
+	@Override
+	public Boolean getBit(K k, long l) {
+		return null;
+	}
+
+	@Override
+	public List<Long> bitField(K k, BitFieldSubCommands bitFieldSubCommands) {
+		return null;
 	}
 }

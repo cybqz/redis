@@ -1,27 +1,12 @@
-/*
- * Copyright 2011-2014 the original author or authors.
- * 
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * 
- *      http://www.apache.org/licenses/LICENSE-2.0
- * 
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.cyb.redisclient.util.redis;
 
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Set;
-
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.RedisConnection;
+import org.springframework.data.redis.connection.RedisZSetCommands;
 import org.springframework.data.redis.connection.RedisZSetCommands.Tuple;
 import org.springframework.data.redis.core.ConvertingCursor;
 import org.springframework.data.redis.core.Cursor;
@@ -29,7 +14,6 @@ import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ScanOptions;
 import org.springframework.data.redis.core.ZSetOperations;
-import org.springframework.data.redis.core.ZSetOperations.TypedTuple;
 
 /**
  * Default implementation of {@link ZSetOperations}.
@@ -37,7 +21,7 @@ import org.springframework.data.redis.core.ZSetOperations.TypedTuple;
  * @author Costin Leau
  * @author Christoph Strobl
  */
-class DefaultZSetOperations<K, V> extends AbstractOperations<K, V> implements ZSetOperations<K, V> {
+public class DefaultZSetOperations<K, V> extends AbstractOperations<K, V> implements ZSetOperations<K, V> {
 
 	DefaultZSetOperations(RedisTemplate<K, V> template) {
 		super(template);
@@ -101,6 +85,11 @@ class DefaultZSetOperations<K, V> extends AbstractOperations<K, V> implements ZS
 				return connection.zInterStore(rawDestKey, rawKeys);
 			}
 		}, true);
+	}
+
+	@Override
+	public Long intersectAndStore(K k, Collection<K> collection, K k1, RedisZSetCommands.Aggregate aggregate, RedisZSetCommands.Weights weights) {
+		return null;
 	}
 
 	public Set<V> range(K key, final long start, final long end) {
@@ -363,19 +352,11 @@ class DefaultZSetOperations<K, V> extends AbstractOperations<K, V> implements ZS
 		}, true);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.springframework.data.redis.core.ZSetOperations#size(java.lang.Object)
-	 */
 	@Override
 	public Long size(K key) {
 		return zCard(key);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.springframework.data.redis.core.ZSetOperations#zCard(java.lang.Object)
-	 */
 	@Override
 	public Long zCard(K key) {
 
@@ -389,10 +370,12 @@ class DefaultZSetOperations<K, V> extends AbstractOperations<K, V> implements ZS
 		}, true);
 	}
 
+	@Override
 	public Long unionAndStore(K key, K otherKey, K destKey) {
 		return unionAndStore(key, Collections.singleton(otherKey), destKey);
 	}
 
+	@Override
 	public Long unionAndStore(K key, Collection<K> otherKeys, K destKey) {
 		final byte[][] rawKeys = rawKeys(key, otherKeys);
 		final byte[] rawDestKey = rawKey(destKey);
@@ -405,10 +388,29 @@ class DefaultZSetOperations<K, V> extends AbstractOperations<K, V> implements ZS
 		}, true);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.springframework.data.redis.core.ZSetOperations#scan(java.lang.Object, org.springframework.data.redis.core.ScanOptions)
+	/**
+	 * 需重写
+	 * @param key
+	 * @param otherKeys
+	 * @param destKey
+	 * @param aggregate
+	 * @param weights
+	 * @return
 	 */
+	@Override
+	public Long unionAndStore(K key, Collection<K> otherKeys, K destKey, RedisZSetCommands.Aggregate aggregate, RedisZSetCommands.Weights weights) {
+
+		final byte[][] rawKeys = rawKeys(key, otherKeys);
+		final byte[] rawDestKey = rawKey(destKey);
+		return execute(new RedisCallback<Long>() {
+
+			public Long doInRedis(RedisConnection connection) {
+				connection.select(dbIndex);
+				return connection.zUnionStore(rawDestKey, rawKeys);
+			}
+		}, true);
+	}
+
 	@Override
 	public Cursor<TypedTuple<V>> scan(K key, final ScanOptions options) {
 
@@ -429,5 +431,15 @@ class DefaultZSetOperations<K, V> extends AbstractOperations<K, V> implements ZS
 				return deserializeTuple(source);
 			}
 		});
+	}
+
+	@Override
+	public Set<V> rangeByLex(K key, RedisZSetCommands.Range range) {
+		return null;
+	}
+
+	@Override
+	public Set<V> rangeByLex(K key, RedisZSetCommands.Range range, RedisZSetCommands.Limit limit) {
+		return null;
 	}
 }

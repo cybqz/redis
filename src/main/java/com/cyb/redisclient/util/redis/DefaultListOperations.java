@@ -1,20 +1,6 @@
-/*
- * Copyright 2011-2013 the original author or authors.
- * 
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * 
- *      http://www.apache.org/licenses/LICENSE-2.0
- * 
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.cyb.redisclient.util.redis;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -31,7 +17,7 @@ import org.springframework.util.CollectionUtils;
  * 
  * @author Costin Leau
  */
-class DefaultListOperations<K, V> extends AbstractOperations<K, V> implements ListOperations<K, V> {
+public class DefaultListOperations<K, V> extends AbstractOperations<K, V> implements ListOperations<K, V> {
 
 	DefaultListOperations(RedisTemplate<K, V> template) {
 		super(template);
@@ -85,6 +71,7 @@ class DefaultListOperations<K, V> extends AbstractOperations<K, V> implements Li
 		}, true);
 	}
 
+	@Override
 	public Long leftPushAll(K key, V... values) {
 		final byte[] rawKey = rawKey(key);
 		final byte[][] rawValues = rawValues(values);
@@ -96,6 +83,12 @@ class DefaultListOperations<K, V> extends AbstractOperations<K, V> implements Li
 		}, true);
 	}
 
+	@Override
+	public Long leftPushAll(K k, Collection<V> collection) {
+		return null;
+	}
+
+	@Override
 	public Long leftPushIfPresent(K key, V value) {
 		final byte[] rawKey = rawKey(key);
 		final byte[] rawValue = rawValue(value);
@@ -108,6 +101,7 @@ class DefaultListOperations<K, V> extends AbstractOperations<K, V> implements Li
 		}, true);
 	}
 
+	@Override
 	public Long leftPush(K key, V pivot, V value) {
 		final byte[] rawKey = rawKey(key);
 		final byte[] rawPivot = rawValue(pivot);
@@ -198,6 +192,11 @@ class DefaultListOperations<K, V> extends AbstractOperations<K, V> implements Li
 				return connection.rPush(rawKey, rawValues);
 			}
 		}, true);
+	}
+
+	@Override
+	public Long rightPushAll(K k, Collection<V> collection) {
+		return null;
 	}
 
 	public Long rightPushIfPresent(K key, V value) {

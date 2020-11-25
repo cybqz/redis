@@ -1,18 +1,3 @@
-/*
- * Copyright 2011-2014 the original author or authors.
- * 
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * 
- *      http://www.apache.org/licenses/LICENSE-2.0
- * 
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.cyb.redisclient.util.redis;
 
 import java.util.Collection;
@@ -39,7 +24,7 @@ import org.springframework.data.redis.core.ScanOptions;
  * @author Costin Leau
  * @author Christoph Strobl
  */
-class DefaultHashOperations<K, HK, HV> extends AbstractOperations<K, Object> implements HashOperations<K, HK, HV> {
+public class DefaultHashOperations<K, HK, HV> extends AbstractOperations<K, Object> implements HashOperations<K, HK, HV> {
 
 	@SuppressWarnings("unchecked")
 	DefaultHashOperations(RedisTemplate<K, ?> template) {
@@ -117,6 +102,11 @@ class DefaultHashOperations<K, HK, HV> extends AbstractOperations<K, Object> imp
 		}, true);
 
 		return deserializeHashKeys(rawValues);
+	}
+
+	@Override
+	public Long lengthOfValue(K k, HK hk) {
+		return null;
 	}
 
 	public Long size(K key) {
@@ -222,7 +212,7 @@ class DefaultHashOperations<K, HK, HV> extends AbstractOperations<K, Object> imp
 		return deserializeHashValues(rawValues);
 	}
 
-	public void delete(K key, Object... hashKeys) {
+	public Long delete(K key, Object... hashKeys) {
 		final byte[] rawKey = rawKey(key);
 		final byte[][] rawHashKeys = rawHashKeys(hashKeys);
 
@@ -230,10 +220,10 @@ class DefaultHashOperations<K, HK, HV> extends AbstractOperations<K, Object> imp
 
 			public Object doInRedis(RedisConnection connection) {
 				connection.select(dbIndex);
-				connection.hDel(rawKey, rawHashKeys);
-				return null;
+				return connection.hDel(rawKey, rawHashKeys);
 			}
 		}, true);
+		return null;
 	}
 
 	public Map<HK, HV> entries(K key) {

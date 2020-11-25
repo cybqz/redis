@@ -9,8 +9,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
 @Configuration
 public class MyWebAppConfiguration extends WebMvcConfigurationSupport {
 
-    @Value("${web.upload-path}")
-    private String uploadPath;
 
     public static String V_PATH = "/path/";
 
@@ -20,10 +18,6 @@ public class MyWebAppConfiguration extends WebMvcConfigurationSupport {
      */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-
-        System.out.println("UPLOAD_PATH:" + uploadPath);
-        registry.addResourceHandler(V_PATH + "**")
-                .addResourceLocations("file:///" + uploadPath);
 
         //默认访问static文件
         registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");

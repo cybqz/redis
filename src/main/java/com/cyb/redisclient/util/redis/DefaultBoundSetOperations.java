@@ -1,19 +1,3 @@
-/*
- * Copyright 2011-2014 the original author or authors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.cyb.redisclient.util.redis;
 
 import java.util.Collection;
@@ -33,7 +17,7 @@ import org.springframework.data.redis.core.SetOperations;
  * @author Costin Leau
  * @author Christoph Strobl
  */
-class DefaultBoundSetOperations<K, V> extends DefaultBoundKeyOperations<K> implements BoundSetOperations<K, V> {
+public class DefaultBoundSetOperations<K, V> extends DefaultBoundKeyOperations<K> implements BoundSetOperations<K, V> {
 
 	private final SetOperations<K, V> ops;
 
@@ -144,10 +128,6 @@ class DefaultBoundSetOperations<K, V> extends DefaultBoundKeyOperations<K> imple
 		return DataType.SET;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.springframework.data.redis.core.BoundSetOperations#sScan(org.springframework.data.redis.core.ScanOptions)
-	 */
 	@Override
 	public Cursor<V> scan(ScanOptions options) {
 		return ops.scan(getKey(), options);

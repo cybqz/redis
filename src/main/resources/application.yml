@@ -1,8 +1,5 @@
 debug: false
 
-web:
-  upload-path: F:/log/
-
 server:
    port: 9090
    tomcat:
@@ -24,6 +21,9 @@ spring:
       name: admin
       password: admin
       roles: root
+  redis:
+    database: 0
+    host: 127.0.0.1
 
 logging:
   level:

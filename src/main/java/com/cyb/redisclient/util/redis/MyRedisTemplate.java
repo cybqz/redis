@@ -1,7 +1,6 @@
 package com.cyb.redisclient.util.redis;
 
 import java.util.Collection;
-
 import com.cyb.redisclient.exception.MethodNotSupportException;
 import com.cyb.redisclient.util.RedisApplication;
 import org.springframework.data.redis.connection.RedisConnection;
@@ -52,37 +51,30 @@ public class MyRedisTemplate<K, V> extends RedisTemplate<K, V> {
 		return new DefaultHashOperations<K, HK, HV>(this, dbIndex);
 	}
 	
-	//--bound
 	@Override
 	public BoundListOperations<K, V> boundListOps(K key) {
-		throw new MethodNotSupportException("myRedisTemplate not support this method : boundListOps(K key) , please use opsForXX");
-		//return new DefaultBoundListOperations<K, V>(key, this);
+		throw new MethodNotSupportException("MyRedisTemplate not support this method : boundListOps(K key) , please use opsForXX");
 	}
 	@Override
 	public BoundSetOperations<K, V> boundSetOps(K key) {
-		throw new MethodNotSupportException("myRedisTemplate not support this method : boundSetOps(K key) , please use opsForXX");
-		//return new DefaultBoundSetOperations<K, V>(key, this);
+		throw new MethodNotSupportException("MyRedisTemplate not support this method : boundSetOps(K key) , please use opsForXX");
 	}
 
 	@Override
 	public BoundZSetOperations<K, V> boundZSetOps(K key) {
-		throw new MethodNotSupportException("myRedisTemplate not support this method : boundZSetOps(K key) , please use opsForXX");
-		//return new DefaultBoundZSetOperations<K, V>(key, this);
+		throw new MethodNotSupportException("MyRedisTemplate not support this method : boundZSetOps(K key) , please use opsForXX");
 	}
 	@Override
 	public <HK, HV> BoundHashOperations<K, HK, HV> boundHashOps(K key) {
-		throw new MethodNotSupportException("myRedisTemplate not support this method : boundHashOps(K key) , please use opsForXX");
-		//return new DefaultBoundHashOperations<K, HK, HV>(key, this);
+		throw new MethodNotSupportException("MyRedisTemplate not support this method : boundHashOps(K key) , please use opsForXX");
 	}
 	@Override
 	public BoundValueOperations<K, V> boundValueOps(K key) {
-		throw new MethodNotSupportException("myRedisTemplate not support this method : boundValueOps(K key) , please use opsForXX");
-		//return new DefaultBoundValueOperations<K, V>(key, this);
+		throw new MethodNotSupportException("MyRedisTemplate not support this method : boundValueOps(K key) , please use opsForXX");
 	}
-	
-	// delete 
+
 	@Override
-	public void delete(K key) {
+	public Boolean delete(K key) {
 		final byte[] rawKey = rawKey(key);
 
 		execute(new RedisCallback<Object>() {
@@ -90,16 +82,16 @@ public class MyRedisTemplate<K, V> extends RedisTemplate<K, V> {
 			public Object doInRedis(RedisConnection connection) {
 				int dbIndex = RedisApplication.redisConnectionDbIndex.get();
 				connection.select(dbIndex);
-				connection.del(rawKey);
-				return null;
+				return connection.del(rawKey);
 			}
 		}, true);
+		return null;
 	}
 	
 	@Override
-	public void delete(Collection<K> keys) {
+	public Long delete(Collection<K> keys) {
 		if (CollectionUtils.isEmpty(keys)) {
-			return;
+			return null;
 		}
 
 		final byte[][] rawKeys = rawKeys(keys);
@@ -109,15 +101,14 @@ public class MyRedisTemplate<K, V> extends RedisTemplate<K, V> {
 			public Object doInRedis(RedisConnection connection) {
 				int dbIndex = RedisApplication.redisConnectionDbIndex.get();
 				connection.select(dbIndex);
-				connection.del(rawKeys);
-				return null;
+				return connection.del(rawKeys);
 			}
 		}, true);
+		return null;
 	}
 	
 	private RedisSerializer keySerializer = new StringRedisSerializer();
-	
-	@SuppressWarnings("unchecked")
+
 	private byte[] rawKey(Object key) {
 		Assert.notNull(key, "non null key required");
 		if (keySerializer == null && key instanceof byte[]) {
@@ -133,7 +124,6 @@ public class MyRedisTemplate<K, V> extends RedisTemplate<K, V> {
 		for (K key : keys) {
 			rawKeys[i++] = rawKey(key);
 		}
-
 		return rawKeys;
 	}
 }

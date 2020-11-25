@@ -1,17 +1,11 @@
 package com.cyb.redisclient.util;
 
 import javax.annotation.PostConstruct;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
-import org.springframework.data.redis.connection.RedisConnection;
-import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
-
 import com.cyb.redisclient.exception.RedisInitException;
 
 @Service
@@ -35,8 +29,6 @@ public class InitContext extends RedisApplication implements Constant  {
 				String password = env.getProperty(REDISPROPERTIES_PASSWORD_PROFIXKEY + i);
 				currentServerName = host;
 				createRedisConnection(name, host, port, password);
-				
-				//runUpdateLimit();
 			}
 		} catch (NumberFormatException e) {
 			log.error("initRedisServers: " + currentServerName+" occur NumberFormatException :" + e.getMessage());
