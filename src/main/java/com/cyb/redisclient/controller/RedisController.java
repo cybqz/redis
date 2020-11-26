@@ -1,35 +1,32 @@
 package com.cyb.redisclient.controller;
 
 import java.util.Set;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import com.cyb.redisclient.service.RedisService;
 import com.cyb.redisclient.service.ViewService;
 import com.cyb.redisclient.util.ztree.ZNode;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.cyb.redisclient.workcenter.WorkcenterResult;
 import com.cyb.redisclient.workcenter.response.WorkcenterResponseBodyJson;
 import com.cyb.redisclient.util.StringUtil;
-
 import com.cyb.redisclient.util.Constant;
 import com.cyb.redisclient.util.ConvertUtil;
 import com.cyb.redisclient.util.Pagination;
 import com.cyb.redisclient.util.QueryEnum;
 import com.cyb.redisclient.util.RKey;
-import com.cyb.redisclient.util.RedisApplication;
+import com.cyb.redisclient.config.RedisConfig;
 
 @Controller
 @RequestMapping("/redis")
-public class RedisController extends RedisApplication implements Constant {
+public class RedisController extends RedisConfig implements Constant {
 	
 	@Autowired
 	private ViewService viewService;
@@ -38,7 +35,7 @@ public class RedisController extends RedisApplication implements Constant {
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public Object home(HttpServletRequest request, HttpServletResponse response) {
-		String defaultServerName = (String) (RedisApplication.redisServerCache.get(0)==null?"":RedisApplication.redisServerCache.get(0).get("name"));
+		String defaultServerName = (String) (RedisConfig.redisServerCache.get(0)==null?"": RedisConfig.redisServerCache.get(0).get("name"));
 		request.setAttribute("serverName", defaultServerName);
 		request.setAttribute("dbIndex", DEFAULT_DBINDEX);
 		return "redirect:/redis/stringList/"+defaultServerName + "/" +DEFAULT_DBINDEX;
@@ -50,7 +47,7 @@ public class RedisController extends RedisApplication implements Constant {
 		request.setAttribute("basePath", BASE_PATH);
 		request.setAttribute("viewPage", "home.jsp");
 		
-		String defaultServerName = (String) (RedisApplication.redisServerCache.get(0)==null?"":RedisApplication.redisServerCache.get(0).get("name"));
+		String defaultServerName = (String) (RedisConfig.redisServerCache.get(0)==null?"": RedisConfig.redisServerCache.get(0).get("name"));
 		request.setAttribute("serverName", defaultServerName);
 		request.setAttribute("dbIndex", DEFAULT_DBINDEX);
 		return "admin/main";
@@ -64,7 +61,7 @@ public class RedisController extends RedisApplication implements Constant {
 			@RequestParam int port,
 			@RequestParam String password) {
 		
-		redisService.addRedisServer(name, host, port, password);
+		//redisService.addRedisServer(name, host, port, password);
 		
 		return WorkcenterResponseBodyJson.custom().build();
 	}

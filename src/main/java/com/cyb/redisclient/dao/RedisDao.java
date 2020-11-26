@@ -12,10 +12,10 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ZSetOperations.TypedTuple;
 import org.springframework.stereotype.Service;
 import com.cyb.redisclient.util.RValue;
-import com.cyb.redisclient.util.RedisApplication;
+import com.cyb.redisclient.config.RedisConfig;
 
 @Service
-public class RedisDao extends RedisApplication {
+public class RedisDao extends RedisConfig {
 	
 	@Autowired
 	RedisTemplateFactory redisTemplateFactory;

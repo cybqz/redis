@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.cyb.redisclient.service.StringService;
 import com.cyb.redisclient.util.Constant;
-import com.cyb.redisclient.util.RedisApplication;
+import com.cyb.redisclient.config.RedisConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +17,7 @@ import com.cyb.redisclient.workcenter.response.WorkcenterResponseBodyJson;
 
 @Controller
 @RequestMapping("/string")
-public class StringConroller extends RedisApplication implements Constant {
+public class StringConroller extends RedisConfig implements Constant {
 	
 	@Autowired
 	private StringService stringService;

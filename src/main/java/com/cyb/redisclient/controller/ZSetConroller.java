@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.cyb.redisclient.service.ZSetService;
 import com.cyb.redisclient.util.Constant;
-import com.cyb.redisclient.util.RedisApplication;
+import com.cyb.redisclient.config.RedisConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +17,7 @@ import com.cyb.redisclient.workcenter.response.WorkcenterResponseBodyJson;
 
 @Controller
 @RequestMapping("/zset")
-public class ZSetConroller extends RedisApplication implements Constant {
+public class ZSetConroller extends RedisConfig implements Constant {
 	
 	@Autowired
 	private ZSetService zsetService;

@@ -4,6 +4,7 @@ import java.nio.charset.Charset;
 import java.util.List;
 import java.util.Set;
 
+import com.cyb.redisclient.config.RedisConfig;
 import org.springframework.data.redis.connection.DataType;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
@@ -15,7 +16,7 @@ public class ConvertUtil {
 		for(byte[] byteArray: keysSet) {
 			String converted = stringSerializer.deserialize(byteArray);
 			DataType dateType = null;
-			switch(RedisApplication.showType) {
+			switch(RedisConfig.showType) {
 			case show:
 				dateType = connection.type(byteArray);
 				break;

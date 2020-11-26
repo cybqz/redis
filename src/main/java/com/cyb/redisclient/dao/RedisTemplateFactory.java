@@ -6,10 +6,10 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import com.cyb.redisclient.exception.RedisConnectionException;
-import com.cyb.redisclient.util.RedisApplication;
+import com.cyb.redisclient.config.RedisConfig;
 
 @Service
-public class RedisTemplateFactory extends RedisApplication {
+public class RedisTemplateFactory extends RedisConfig {
 	
 	private static Log log = LogFactory.getLog(RedisTemplateFactory.class);
 	

@@ -9,22 +9,17 @@ import org.springframework.stereotype.Service;
 
 import com.cyb.redisclient.dao.RedisDao;
 import com.cyb.redisclient.service.RedisService;
-import com.cyb.redisclient.util.RedisApplication;
+import com.cyb.redisclient.config.RedisConfig;
 
 import com.cyb.redisclient.workcenter.WorkcenterCodeEnum;
 import com.cyb.redisclient.workcenter.WorkcenterResult;
 import com.cyb.redisclient.common.WebConstant;
 
 @Service
-public class RedisServiceImpl extends RedisApplication implements RedisService, WebConstant  {
+public class RedisServiceImpl extends RedisConfig implements RedisService, WebConstant  {
 	
 	@Autowired
 	private RedisDao redisDao;
-	
-	@Override
-	public void addRedisServer(String name, String host, int port, String password) {
-		createRedisConnection(name, host, port, password);
-	}
 	
 	@Override
 	public void addKV(String serverName, int dbIndex, String dataType,
@@ -89,7 +84,7 @@ public class RedisServiceImpl extends RedisApplication implements RedisService, 
 	}
 
 	private String getDataType(String serverName, int dbIndex, String key) {
-		RedisTemplate redisTemplate = RedisApplication.redisTemplatesMap.get(serverName);
+		RedisTemplate redisTemplate = RedisConfig.redisTemplatesMap.get(serverName);
 		RedisConnection connection = RedisConnectionUtils.getConnection(redisTemplate.getConnectionFactory());
 		connection.select(dbIndex);
 		DataType dataType = connection.type(key.getBytes());
@@ -98,7 +93,7 @@ public class RedisServiceImpl extends RedisApplication implements RedisService, 
 	}
 	
 	private Object getKV(String serverName, int dbIndex, String key) {
-		RedisTemplate redisTemplate = RedisApplication.redisTemplatesMap.get(serverName);
+		RedisTemplate redisTemplate = RedisConfig.redisTemplatesMap.get(serverName);
 		RedisConnection connection = RedisConnectionUtils.getConnection(redisTemplate.getConnectionFactory());
 		connection.select(dbIndex);
 		DataType dataType = connection.type(key.getBytes());

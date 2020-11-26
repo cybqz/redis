@@ -1,16 +1,11 @@
 package com.cyb.redisclient.config;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
 @Configuration
 public class MyWebAppConfiguration extends WebMvcConfigurationSupport {
-
-
-    public static String V_PATH = "/path/";
 
     /**
      * @Description:

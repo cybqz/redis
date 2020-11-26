@@ -17,12 +17,12 @@ import com.cyb.redisclient.service.ViewService;
 import com.cyb.redisclient.util.Constant;
 import com.cyb.redisclient.util.Pagination;
 import com.cyb.redisclient.util.RKey;
-import com.cyb.redisclient.util.RedisApplication;
+import com.cyb.redisclient.config.RedisConfig;
 import com.cyb.redisclient.util.RefreshModeEnum;
 import com.cyb.redisclient.util.ShowTypeEnum;
 
 @Service
-public class ViewServiceImpl extends RedisApplication implements ViewService, Constant {
+public class ViewServiceImpl extends RedisConfig implements ViewService, Constant {
 
 	@Override
 	public void changeRefreshMode(String mode) {
@@ -39,7 +39,7 @@ public class ViewServiceImpl extends RedisApplication implements ViewService, Co
 		case manually:
 			break;
 		case auto:
-			for(Map<String, Object> redisServerMap : RedisApplication.redisServerCache) {
+			for(Map<String, Object> redisServerMap : RedisConfig.redisServerCache) {
 				RedisZtreeUtil.refreshRedisNavigateZtree((String)redisServerMap.get("name"));
 			}
 			break;
@@ -55,7 +55,7 @@ public class ViewServiceImpl extends RedisApplication implements ViewService, Co
 		if(permit) {
 			try {
 logCurrentTime("try {");
-				for(Map<String, Object> redisServerMap : RedisApplication.redisServerCache) {
+				for(Map<String, Object> redisServerMap : RedisConfig.redisServerCache) {
 logCurrentTime("refreshKeys(" + (String)redisServerMap.get("name"));
 					for(int i=0;i<=REDIS_DEFAULT_DB_SIZE;i++) {
 						refreshKeys((String)redisServerMap.get("name"), i);
@@ -79,7 +79,7 @@ logCurrentTime("finally {");
 	public void refreshAllKeys() {
 		boolean permit = getUpdatePermition();
 		try {
-			for(Map<String, Object> redisServerMap : RedisApplication.redisServerCache) {
+			for(Map<String, Object> redisServerMap : RedisConfig.redisServerCache) {
 				for(int i=0;i<=REDIS_DEFAULT_DB_SIZE;i++) {
 					refreshKeys((String)redisServerMap.get("name"), i);
 				}
@@ -90,7 +90,7 @@ logCurrentTime("finally {");
 	}
 	
 	private void refreshKeys(String serverName, int dbIndex) {
-		RedisTemplate redisTemplate = RedisApplication.redisTemplatesMap.get(serverName);
+		RedisTemplate redisTemplate = RedisConfig.redisTemplatesMap.get(serverName);
 		initRedisKeysCache(redisTemplate, serverName, dbIndex);
 	}
 

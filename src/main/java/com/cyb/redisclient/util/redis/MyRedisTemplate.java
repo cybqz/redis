@@ -2,7 +2,7 @@ package com.cyb.redisclient.util.redis;
 
 import java.util.Collection;
 import com.cyb.redisclient.exception.MethodNotSupportException;
-import com.cyb.redisclient.util.RedisApplication;
+import com.cyb.redisclient.config.RedisConfig;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.BoundHashOperations;
 import org.springframework.data.redis.core.BoundListOperations;
@@ -27,27 +27,27 @@ public class MyRedisTemplate<K, V> extends RedisTemplate<K, V> {
 	
 	@Override
 	public ValueOperations<K, V> opsForValue() {
-		int dbIndex = RedisApplication.redisConnectionDbIndex.get();
+		int dbIndex = RedisConfig.redisConnectionDbIndex.get();
 		return new DefaultValueOperations<K, V>(this, dbIndex);
 	}
 	@Override
 	public ListOperations<K, V> opsForList() {
-		int dbIndex = RedisApplication.redisConnectionDbIndex.get();
+		int dbIndex = RedisConfig.redisConnectionDbIndex.get();
 		return new DefaultListOperations<K, V>(this, dbIndex);
 	}
 	@Override
 	public SetOperations<K, V> opsForSet() {
-		int dbIndex = RedisApplication.redisConnectionDbIndex.get();
+		int dbIndex = RedisConfig.redisConnectionDbIndex.get();
 		return new DefaultSetOperations<K, V>(this, dbIndex);
 	}
 	@Override
 	public ZSetOperations<K, V> opsForZSet() {
-		int dbIndex = RedisApplication.redisConnectionDbIndex.get();
+		int dbIndex = RedisConfig.redisConnectionDbIndex.get();
 		return new DefaultZSetOperations<K, V>(this, dbIndex);
 	}
 	@Override
 	public <HK, HV> HashOperations<K, HK, HV> opsForHash() {
-		int dbIndex = RedisApplication.redisConnectionDbIndex.get();
+		int dbIndex = RedisConfig.redisConnectionDbIndex.get();
 		return new DefaultHashOperations<K, HK, HV>(this, dbIndex);
 	}
 	
@@ -80,7 +80,7 @@ public class MyRedisTemplate<K, V> extends RedisTemplate<K, V> {
 		execute(new RedisCallback<Object>() {
 
 			public Object doInRedis(RedisConnection connection) {
-				int dbIndex = RedisApplication.redisConnectionDbIndex.get();
+				int dbIndex = RedisConfig.redisConnectionDbIndex.get();
 				connection.select(dbIndex);
 				return connection.del(rawKey);
 			}
@@ -99,7 +99,7 @@ public class MyRedisTemplate<K, V> extends RedisTemplate<K, V> {
 		execute(new RedisCallback<Object>() {
 
 			public Object doInRedis(RedisConnection connection) {
-				int dbIndex = RedisApplication.redisConnectionDbIndex.get();
+				int dbIndex = RedisConfig.redisConnectionDbIndex.get();
 				connection.select(dbIndex);
 				return connection.del(rawKeys);
 			}
