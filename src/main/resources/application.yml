@@ -19,13 +19,13 @@ spring:
   security:
     user:
       name: admin
-      password: admin
+      password: $2a$10$slVrHXE1cvyUnZSLskAMp.A5.g057mTaU7GwP6jdyU7Df/3P/d6DK
       roles: root
   redis:
     database: 0
     host: 127.0.0.1
     port: 6379
-    password:
+    password: ""
 
 logging:
   level:

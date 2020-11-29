@@ -20,7 +20,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnection;
-import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.core.RedisConnectionUtils;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
@@ -39,7 +39,7 @@ public abstract class RedisConfig implements Constant {
 	@Value("${spring.redis.password}")
 	private String password;
 
-	private String name = "Rname";
+	private static final String LOCAL_NAME = "localhost";
 
 	public static volatile RefreshModeEnum refreshMode = RefreshModeEnum.manually;
 	public static volatile ShowTypeEnum showType = ShowTypeEnum.show;
@@ -65,9 +65,19 @@ public abstract class RedisConfig implements Constant {
 		}
 	};
 
+	/**
+	 * 注意：RedisConnectionFactory存在共享连接无法切换库的问题
+	 *
+	 * @param factory
+	 * @return
+	 */
 	@Bean
 	@SuppressWarnings("all")
-	public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory factory) {
+	public RedisTemplate<String, Object> redisTemplate(LettuceConnectionFactory factory) {
+
+		// 关闭共享链接
+		factory.setShareNativeConnection(false);
+
 		RedisTemplate<String, Object> template = new RedisTemplate<String, Object>();
 		template.setConnectionFactory(factory);
 		Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
@@ -87,18 +97,17 @@ public abstract class RedisConfig implements Constant {
 		template.afterPropertiesSet();
 
 
-		RedisConfig.redisTemplatesMap.put(name, template);
-
+		RedisConfig.redisTemplatesMap.put(LOCAL_NAME, template);
 		Map<String, Object> redisServerMap = new HashMap<String, Object>();
-		redisServerMap.put("name", name);
+		redisServerMap.put("name", LOCAL_NAME);
 		redisServerMap.put("host", host);
 		redisServerMap.put("port", port);
 		redisServerMap.put("password", password);
 		RedisConfig.redisServerCache.add(redisServerMap);
 
-		initRedisKeysCache(template, name);
+		initRedisKeysCache(template, LOCAL_NAME);
 
-		RedisZtreeUtil.initRedisNavigateZtree(name);
+		RedisZtreeUtil.initRedisNavigateZtree(LOCAL_NAME);
 
 		return template;
 	}

@@ -1,29 +1,22 @@
 package com.cyb.redisclient.config;
 
-import org.apache.catalina.connector.Connector;
-import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
 @Configuration
-public class ProjectConfig {
+public class ProjectConfig extends WebMvcConfigurationSupport {
 
-    @Bean
-    public TomcatServletWebServerFactory webServerFactory() {
-        TomcatServletWebServerFactory factory = new TomcatServletWebServerFactory();
-        factory.addConnectorCustomizers((Connector connector) -> {
-            connector.setProperty("relaxedPathChars", "\"<>[\\]^`{|}");
-            connector.setProperty("relaxedQueryChars", "\"<>[\\]^`{|}");
-        });
-        return factory;
+    /**
+     * @Description:
+     * 对文件的路径进行配置, 创建一个虚拟路径/Path/**
+     */
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+
+        //默认访问static文件
+        registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");
+        super.addResourceHandlers(registry);
     }
 
-    @Bean
-    public InternalResourceViewResolver viewResolver() {
-        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-        viewResolver.setPrefix("/WEB-INF/");
-        viewResolver.setSuffix(".jsp");
-        return viewResolver;
-    }
 }

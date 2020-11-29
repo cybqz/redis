@@ -9,20 +9,20 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <title>redis-admin</title>
-<link href="${pageContext.request.contextPath}/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet"><!-- MetisMenu CSS -->
-<link href="${pageContext.request.contextPath}/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet"><!-- Custom Fonts -->
-<link href="${pageContext.request.contextPath}/sb-admin/css/timeline.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/sb-admin/css/sb-admin-2.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/css/ztree/zTreeStyle.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/static/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/static/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet"><!-- MetisMenu CSS -->
+<link href="${pageContext.request.contextPath}/static/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet"><!-- Custom Fonts -->
+<link href="${pageContext.request.contextPath}/static/sb-admin/css/timeline.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/static/sb-admin/css/sb-admin-2.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/static/css/ztree/zTreeStyle.css" rel="stylesheet">
 
-<script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
-<script src="${pageContext.request.contextPath}/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="${pageContext.request.contextPath}/js/jquery.form.js"></script>
-<script src="${pageContext.request.contextPath}/js/jquery.table.js"></script>
-<script src="${pageContext.request.contextPath}/js/jquery.pagination.js"></script>
-<script src="${pageContext.request.contextPath}/js/jquery.ztree.all-3.5.min.js"></script>
-<script src="${pageContext.request.contextPath}/sb-admin/js/sb-admin-2.js"></script>
+<script src="${pageContext.request.contextPath}/static/js/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/static/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/static/js/jquery.form.js"></script>
+<script src="${pageContext.request.contextPath}/static/js/jquery.table.js"></script>
+<script src="${pageContext.request.contextPath}/static/js/jquery.pagination.js"></script>
+<script src="${pageContext.request.contextPath}/static/js/jquery.ztree.all-3.5.min.js"></script>
+<script src="${pageContext.request.contextPath}/static/sb-admin/js/sb-admin-2.js"></script>
 </head>
 
 <body>

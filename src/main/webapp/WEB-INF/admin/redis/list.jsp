@@ -86,13 +86,13 @@
 </div>
 </div>
 
-<jsp:include page="./addModal.jsp"></jsp:include>
-<jsp:include page="./addServerModal.jsp"></jsp:include>
-<jsp:include page="./updateModal.jsp"></jsp:include>
+<jsp:include page="addModal.jsp"></jsp:include>
+<jsp:include page="addServerModal.jsp"></jsp:include>
+<jsp:include page="updateModal.jsp"></jsp:include>
 
-<script src="<%=basePath%>/js/admin/redis/dataTypeLineHtml.js"></script>
-<script src="<%=basePath%>/js/admin/redis/addRedisKV.js"></script>
-<script src="<%=basePath%>/js/admin/redis/updateRedisKV.js"></script>
+<script src="<%=basePath%>/static/js/admin/redis/dataTypeLineHtml.js"></script>
+<script src="<%=basePath%>/static/js/admin/redis/addRedisKV.js"></script>
+<script src="<%=basePath%>/static/js/admin/redis/updateRedisKV.js"></script>
 <script>
 	var serverName = '${serverName}';
 	var dbIndex = '${dbIndex}';
@@ -187,4 +187,4 @@
 	});
 </script>
 
-<script type="text/javascript" src="<%=basePath%>/js/admin/redis/ztree.js" ></script>
+<script type="text/javascript" src="<%=basePath%>/static/js/admin/redis/ztree.js" ></script>

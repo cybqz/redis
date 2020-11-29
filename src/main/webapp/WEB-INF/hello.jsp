@@ -32,11 +32,5 @@
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="<%=basePath%>/flat/js/vendor/video.js"></script>
 	<script src="<%=basePath%>/flat/js/flat-ui.min.js"></script>
-
-
-
-	
-	
-	
 </body>
 </html>
