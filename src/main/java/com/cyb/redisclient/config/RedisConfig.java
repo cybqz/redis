@@ -27,17 +27,9 @@ import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import com.cyb.redisclient.exception.ConcurrentException;
 
-@Configuration
-public abstract class RedisConfig implements Constant {
+public abstract class RedisConfig extends ConfigValues implements Constant {
 
 	private static Log log = LogFactory.getLog(RedisConfig.class);
-
-	@Value("${spring.redis.host}")
-	private String host;
-	@Value("${spring.redis.port}")
-	private String port;
-	@Value("${spring.redis.password}")
-	private String password;
 
 	private static final String LOCAL_NAME = "localhost";
 

@@ -7,7 +7,6 @@
 	</button>
 	<a class="navbar-brand" href="${pageContext.request.contextPath}/redis">redis-admin</a>
 </div>
-<!-- /.navbar-header -->
 
 <ul class="nav navbar-top-links navbar-right">
 	<span>&nbsp;</span>
@@ -19,8 +18,6 @@
 		<ul class="dropdown-menu dropdown-user">
 			<li><a class="refresh_a" href="javascript:void(0);" value1="auto"><i class="fa fa-cogs fa-fw"></i> Auto refresh</a></li>
 			<li><a class="refresh_a" href="javascript:void(0);" value1="auto"><i class="fa fa-hand-o-right fa-fw"></i> Manually refresh</a></li>
-		</ul> <!-- /.dropdown-user -->
+		</ul>
 	</li>
-	<!-- /.dropdown -->
 </ul>
-<!-- /.navbar-top-links -->

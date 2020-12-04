@@ -1,14 +1,15 @@
 $(document).ready(function() {
-	var url = basePath + '/redis/serverTree';
+
+	let url = basePath + '/redis/serverTree';
 	initZTree(url);
 	$(".refresh_btn").on("click", function() {
-		var url = basePath + '/redis/refresh';
+		let url = basePath + '/redis/refresh';
 		refreshZTree(url);
 	});
 	
 	$(".addServer_btn").on("click", function() {
-		var url = basePath + '/redis/addServer';
-		var formParam = $("#addServerModalForm").formSerialize();
+		let url = basePath + '/redis/addServer';
+		let formParam = $("#addServerModalForm").formSerialize();
 		$.ajax({
 			type: "post",
 			url : url,

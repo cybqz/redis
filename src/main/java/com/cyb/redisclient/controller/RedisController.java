@@ -43,7 +43,7 @@ public class RedisController extends RedisConfig implements Constant {
 	@RequestMapping(value="/index", method=RequestMethod.GET)
 	public Object index(HttpServletRequest request, HttpServletResponse response) {
 		
-		request.setAttribute("basePath", BASE_PATH);
+		request.setAttribute("basePath", contextPath);
 		request.setAttribute("viewPage", "home.jsp");
 		
 		String defaultServerName = (String) (RedisConfig.redisServerCache.get(0)==null?"": RedisConfig.redisServerCache.get(0).get("name"));
@@ -68,9 +68,8 @@ public class RedisController extends RedisConfig implements Constant {
 	@RequestMapping(value="/serverTree", method=RequestMethod.GET)
 	@ResponseBody
 	public Object serverTree(HttpServletRequest request, HttpServletResponse response) {
-		
+
 		Set<ZNode> keysSet = viewService.getLeftTree();
-		
 		return keysSet;
 	}
 	
@@ -131,7 +130,7 @@ public class RedisController extends RedisConfig implements Constant {
 		Set<RKey> redisKeys = viewService.getRedisKeys(pagination, serverName, dbIndex, keyPrefixs, queryKey, queryValue);
 		logCurrentTime("viewService.getRedisKeys end");
 		request.setAttribute("redisServers", redisServerCache);
-		request.setAttribute("basePath", BASE_PATH);
+		request.setAttribute("basePath", contextPath);
 		request.setAttribute("queryLabel_ch", queryKey_ch);
 		request.setAttribute("queryLabel_en", queryKey);
 		request.setAttribute("queryValue", queryValue);

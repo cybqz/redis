@@ -30,30 +30,24 @@
 	<jsp:include page="common/modelDialog.jsp"></jsp:include>
 	
 	<div id="wrapper">
-	
-		<!-- Navigation -->
-		<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
 
+		<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
 			<jsp:include page="header.jsp"></jsp:include>
 			<jsp:include page="menu.jsp"></jsp:include>
-
 		</nav>
 
 		<div id="page-wrapper">
 			<br>
-			<jsp:include page="${viewPage }"></jsp:include>
+			<jsp:include page="${viewPage}"></jsp:include>
 		</div>
-		<!-- /#page-wrapper -->
-
 		
 	</div>
-	<!-- /#wrapper -->
 	
 	<script>
 		$(document).ready(function() {
 			$(".refresh_a").on("click", function() {
-				var value1 = $(this).attr("value1");
-				var url = "${pageContext.request.contextPath}/redis/refreshMode";
+				let value1 = $(this).attr("value1");
+				let url = "${pageContext.request.contextPath}/redis/refreshMode";
 				$.ajax({
 					type: "post",
 					url: url,
@@ -68,7 +62,7 @@
 			});
 			$("#side-menu").find("a").each(function() {
 
-				var value2 = $(this).attr("value2");
+				let value2 = $(this).attr("value2");
 				if (value2 != "#") {
 					$(this).on("click", function() {
 						var url = $(this).attr("value2");

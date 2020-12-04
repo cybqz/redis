@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
+
+import com.cyb.redisclient.config.ConfigValues;
 import com.cyb.redisclient.util.ztree.ZNode;
 import org.springframework.data.redis.core.RedisTemplate;
 
@@ -33,6 +35,4 @@ public interface Constant {
 	
 	/** operator for log **/
 	public static final String GETKV = "GETKV";
-
-	public static final String BASE_PATH = "cybredis";
 }
