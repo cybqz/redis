@@ -4,10 +4,10 @@ import com.cyb.redisclient.workcenter.WorkcenterResult;
 
 public interface RedisService {
 	
-	void addKV(String serverName, int dbIndex, String dataType, String key, String[] values, double[] scores, String[] members, String[] fields);
+	public void addKV(String serverName, int dbIndex, String dataType, String key, String[] values, double[] scores, String[] members, String[] fields);
 
-	WorkcenterResult getKV(String serverName, int dbIndex, String dataType, String key);
+	public WorkcenterResult getKV(String serverName, int dbIndex, String dataType, String key);
 
-	void delKV(String serverName, int dbIndex, String deleteKeys);
+	public void delKV(String serverName, int dbIndex, String deleteKeys);
 
 }

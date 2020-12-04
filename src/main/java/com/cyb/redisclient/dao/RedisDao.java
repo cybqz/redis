@@ -19,27 +19,24 @@ public class RedisDao extends RedisConfig {
 	
 	@Autowired
 	RedisTemplateFactory redisTemplateFactory;
-	
-	//--- SET 
-	public void addSTRING(String serverName, int dbIndex, String key,
-			String value) {
+
+	public void addSTRING(String serverName, int dbIndex, String key, String value) {
 		RedisTemplate<String, Object> redisTemplate = redisTemplateFactory.getRedisTemplate(serverName);
 		redisConnectionDbIndex.set(dbIndex);
 		redisTemplate.opsForValue().set(key, value);
 	}
 	
-	public void addLIST(String serverName, int dbIndex, String key,
-			String[] values) {
+	public Long addLIST(String serverName, int dbIndex, String key, String[] values) {
 		RedisTemplate<String, Object> redisTemplate = redisTemplateFactory.getRedisTemplate(serverName);
 		redisConnectionDbIndex.set(dbIndex);
-		redisTemplate.opsForList().rightPushAll(key, values);
+		return redisTemplate.opsForList().rightPushAll(key, values);
 	}
 	
-	public void addSET(String serverName, int dbIndex, String key,
+	public Long addSET(String serverName, int dbIndex, String key,
 			String[] values) {
 		RedisTemplate<String, Object> redisTemplate = redisTemplateFactory.getRedisTemplate(serverName);
 		redisConnectionDbIndex.set(dbIndex);
-		redisTemplate.opsForSet().add(key, values);
+		return redisTemplate.opsForSet().add(key, values);
 	}
 
 	public void addZSET(String serverName, int dbIndex, String key,
@@ -93,7 +90,6 @@ public class RedisDao extends RedisConfig {
 		redisTemplate.opsForHash().putAll(key, hashmap);
 	}
 
-	//--- GET 
 	public Object getSTRING(String serverName, int dbIndex, String key) {
 		RedisTemplate<String, Object> redisTemplate = redisTemplateFactory.getRedisTemplate(serverName);
 		redisConnectionDbIndex.set(dbIndex);
@@ -133,21 +129,19 @@ public class RedisDao extends RedisConfig {
 	}
 
 	//--- delete
-	public void delRedisKeys(String serverName, int dbIndex, String deleteKeys) {
+	public Long delRedisKeys(String serverName, int dbIndex, String deleteKeys) {
 		RedisTemplate<String, Object> redisTemplate = redisTemplateFactory.getRedisTemplate(serverName);
 		redisConnectionDbIndex.set(dbIndex);
 		String[] keys = deleteKeys.split(",");
-		redisTemplate.delete(Arrays.asList(keys));
-		return;
+		return redisTemplate.delete(Arrays.asList(keys));
 	}
 	
-	public void delRedisHashField(String serverName, int dbIndex, String key, String field) {
+	public Long delRedisHashField(String serverName, int dbIndex, String key, String field) {
 		RedisTemplate<String, Object> redisTemplate = redisTemplateFactory.getRedisTemplate(serverName);
 		redisConnectionDbIndex.set(dbIndex);
 		List<String> hashKeys = new ArrayList<String>();
 		hashKeys.add(field);
-		redisTemplate.opsForHash().delete(key, hashKeys.toArray());
-		return;
+		return redisTemplate.opsForHash().delete(key, hashKeys.toArray());
 	}
 
 	public void updateHashField(String serverName, int dbIndex, String key, String field, String value) {
@@ -158,62 +152,54 @@ public class RedisDao extends RedisConfig {
 		return;
 	}
 
-	public void delSetValue(String serverName, int dbIndex, String key, String value) {
+	public Long delSetValue(String serverName, int dbIndex, String key, String value) {
 		RedisTemplate<String, Object> redisTemplate = redisTemplateFactory.getRedisTemplate(serverName);
 		redisConnectionDbIndex.set(dbIndex);
-		redisTemplate.opsForSet().remove(key, value);
-		return;
+		return redisTemplate.opsForSet().remove(key, value);
 	}
 
-	public void updateSetValue(String serverName, int dbIndex, String key, String value) {
+	public Long updateSetValue(String serverName, int dbIndex, String key, String value) {
 		RedisTemplate<String, Object> redisTemplate = redisTemplateFactory.getRedisTemplate(serverName);
 		redisConnectionDbIndex.set(dbIndex);
-		redisTemplate.opsForSet().add(key, value);
-		return;
+		return redisTemplate.opsForSet().add(key, value);
 	}
 	
-	public void delZSetValue(String serverName, int dbIndex, String key, String member) {
+	public Long delZSetValue(String serverName, int dbIndex, String key, String member) {
 		RedisTemplate<String, Object> redisTemplate = redisTemplateFactory.getRedisTemplate(serverName);
 		redisConnectionDbIndex.set(dbIndex);
 		String value = member;
-		redisTemplate.opsForZSet().remove(key, value);
-		return;
+		return redisTemplate.opsForZSet().remove(key, value);
 	}
 
-	public void updateZSetValue(String serverName, int dbIndex, String key, double score, String member) {
+	public Boolean updateZSetValue(String serverName, int dbIndex, String key, double score, String member) {
 		RedisTemplate<String, Object> redisTemplate = redisTemplateFactory.getRedisTemplate(serverName);
 		redisConnectionDbIndex.set(dbIndex);
 		String value = member;
-		redisTemplate.opsForZSet().add(key, value, score);
-		return;
+		return redisTemplate.opsForZSet().add(key, value, score);
 	}
 	
-	public void ldelListValue(String serverName, int dbIndex, String key) {
+	public Object ldelListValue(String serverName, int dbIndex, String key) {
 		RedisTemplate<String, Object> redisTemplate = redisTemplateFactory.getRedisTemplate(serverName);
 		redisConnectionDbIndex.set(dbIndex);
-		redisTemplate.opsForList().leftPop(key);
-		return;
+		return redisTemplate.opsForList().leftPop(key);
 	}
 	
-	public void rdelListValue(String serverName, int dbIndex, String key) {
+	public Object rdelListValue(String serverName, int dbIndex, String key) {
 		RedisTemplate<String, Object> redisTemplate = redisTemplateFactory.getRedisTemplate(serverName);
 		redisConnectionDbIndex.set(dbIndex);
-		redisTemplate.opsForList().rightPop(key);
-		return;
+		return redisTemplate.opsForList().rightPop(key);
 	}
 
-	public void lupdateListValue(String serverName, int dbIndex, String key, String value) {
+	public Long lupdateListValue(String serverName, int dbIndex, String key, String value) {
 		RedisTemplate<String, Object> redisTemplate = redisTemplateFactory.getRedisTemplate(serverName);
 		redisConnectionDbIndex.set(dbIndex);
-		redisTemplate.opsForList().leftPush(key, value);
-		return;
+		return redisTemplate.opsForList().leftPush(key, value);
 	}
 	
-	public void rupdateListValue(String serverName, int dbIndex, String key, String value) {
+	public Long rupdateListValue(String serverName, int dbIndex, String key, String value) {
 		RedisTemplate<String, Object> redisTemplate = redisTemplateFactory.getRedisTemplate(serverName);
 		redisConnectionDbIndex.set(dbIndex);
-		redisTemplate.opsForList().rightPush(key, value);
-		return;
+		return redisTemplate.opsForList().rightPush(key, value);
 	}
 
 	public void delRedisValue(String serverName, int dbIndex, String key) {
