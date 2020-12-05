@@ -1,7 +1,7 @@
 $(document).ready(function() {
 $('#addModal').on('show.bs.modal', function(event) {
-			var button = $(event.relatedTarget);
-			var operator = button.data('whatever'); 
+			let button = $(event.relatedTarget);
+			let operator = button.data('whatever'); 
 			if(operator == 'add') {
 				$("#addModalLabel").text("Add redis-data");
 			}
@@ -9,10 +9,10 @@ $('#addModal').on('show.bs.modal', function(event) {
 		
 		
 		$('#addModal').on("click", ".plus_btn", function() {
-			var dataType = $(this).attr("value1");
+			let dataType = $(this).attr("value1");
 			
-			var formEle;
-			var addHtml = '';
+			let formEle;
+			let addHtml = '';
 			switch(dataType) {
 			case 'STRING':
 				//never go here
@@ -39,10 +39,10 @@ $('#addModal').on('show.bs.modal', function(event) {
 		});
 		
 		$('#addModal').on("click", ".minus_btn", function() {
-			var dataType = $(this).attr("value1");
+			let dataType = $(this).attr("value1");
 			
-			var inputEle;
-			var addHtml = '';
+			let inputEle;
+			let addHtml = '';
 			switch(dataType) {
 			case 'STRING':
 				//never go here
@@ -65,10 +65,10 @@ $('#addModal').on('show.bs.modal', function(event) {
 		
 		
 		$("#addModal_dateType").on("change", function() {
-			var dataType = $(this).val();
-			var addModalForm = $("#addModalForm");
+			let dataType = $(this).val();
+			let addModalForm = $("#addModalForm");
 			
-			var addHtml = '';
+			let addHtml = '';
 			switch(dataType) {
 			case 'STRING':
 				addHtml = stringHtml;
@@ -92,16 +92,16 @@ $('#addModal').on('show.bs.modal', function(event) {
 		})
 		
 		$(".add_KV_btn").on("click", function() {
-			var addFormParam = $("#addModalForm").formSerialize();
+			let addFormParam = $("#addModalForm").formSerialize();
 			
-			var url = basePath + '/redis/KV';
+			let url = basePath + '/redis/KV';
 			$.ajax({
 				type: "post",
 				url: url,
 				dataType: "json",
 				data: addFormParam,
 				success: function(data) {
-					modelAlert(data);
+					modelAlert(data, 2000);
 				}
 			})
 			

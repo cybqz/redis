@@ -34,7 +34,7 @@ public class RedisController extends RedisConfig implements Constant {
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public Object home(HttpServletRequest request, HttpServletResponse response) {
-		String defaultServerName = (String) (RedisConfig.redisServerCache.get(0)==null?"": RedisConfig.redisServerCache.get(0).get("name"));
+		String defaultServerName = (String) (RedisConfig.REDIS_SERVER_CACHE.get(0)==null?"": RedisConfig.REDIS_SERVER_CACHE.get(0).get("name"));
 		request.setAttribute("serverName", defaultServerName);
 		request.setAttribute("dbIndex", DEFAULT_DBINDEX);
 		return "redirect:/redis/stringList/"+defaultServerName + "/" +DEFAULT_DBINDEX;
@@ -46,7 +46,7 @@ public class RedisController extends RedisConfig implements Constant {
 		request.setAttribute("basePath", contextPath);
 		request.setAttribute("viewPage", "home.jsp");
 		
-		String defaultServerName = (String) (RedisConfig.redisServerCache.get(0)==null?"": RedisConfig.redisServerCache.get(0).get("name"));
+		String defaultServerName = (String) (RedisConfig.REDIS_SERVER_CACHE.get(0)==null?"": RedisConfig.REDIS_SERVER_CACHE.get(0).get("name"));
 		request.setAttribute("serverName", defaultServerName);
 		request.setAttribute("dbIndex", DEFAULT_DBINDEX);
 		return "admin/main";
@@ -129,7 +129,7 @@ public class RedisController extends RedisConfig implements Constant {
 		logCurrentTime("viewService.getRedisKeys start");
 		Set<RKey> redisKeys = viewService.getRedisKeys(pagination, serverName, dbIndex, keyPrefixs, queryKey, queryValue);
 		logCurrentTime("viewService.getRedisKeys end");
-		request.setAttribute("redisServers", redisServerCache);
+		request.setAttribute("redisServers", REDIS_SERVER_CACHE);
 		request.setAttribute("basePath", contextPath);
 		request.setAttribute("queryLabel_ch", queryKey_ch);
 		request.setAttribute("queryLabel_en", queryKey);
@@ -215,7 +215,10 @@ public class RedisController extends RedisConfig implements Constant {
 			@RequestParam String serverName, @RequestParam int dbIndex, 
 			@RequestParam String deleteKeys) {
 		
-		redisService.delKV(serverName, dbIndex, deleteKeys);
+		Long result = redisService.delKV(serverName, dbIndex, deleteKeys);
+		if(result.intValue() > 0){
+			viewService.delRedisKeysListMapByKeys(serverName, dbIndex, deleteKeys);
+		}
 		
 		return WorkcenterResponseBodyJson.custom().build();
 		

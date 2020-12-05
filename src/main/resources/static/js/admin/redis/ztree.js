@@ -61,7 +61,7 @@ function refreshZTree(url) {
 			if(data.returncode == "200") {
 				refreshPage(serverName, dbIndex, []);
 			} else {
-				modelAlert(data);
+				modelAlert(data, 2000);
 			}
 		}
 	});

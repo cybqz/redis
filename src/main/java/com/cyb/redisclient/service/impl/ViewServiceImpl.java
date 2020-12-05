@@ -11,6 +11,7 @@ import com.cyb.redisclient.util.ztree.RedisZtreeUtil;
 import com.cyb.redisclient.util.ztree.ZNode;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 import com.cyb.redisclient.service.ViewService;
@@ -39,12 +40,12 @@ public class ViewServiceImpl extends RedisConfig implements ViewService, Constan
 		case manually:
 			break;
 		case auto:
-			for(Map<String, Object> redisServerMap : RedisConfig.redisServerCache) {
+			for(Map<String, Object> redisServerMap : RedisConfig.REDIS_SERVER_CACHE) {
 				RedisZtreeUtil.refreshRedisNavigateZtree((String)redisServerMap.get("name"));
 			}
 			break;
 		}
-		return new TreeSet<ZNode>(redisNavigateZtree);
+		return new TreeSet<ZNode>(REDIS_NAVIGATE_ZTREE);
 		
 	}
 	
@@ -54,23 +55,23 @@ public class ViewServiceImpl extends RedisConfig implements ViewService, Constan
 		Set<ZNode> zTree = null;
 		if(permit) {
 			try {
-logCurrentTime("try {");
-				for(Map<String, Object> redisServerMap : RedisConfig.redisServerCache) {
-logCurrentTime("refreshKeys(" + (String)redisServerMap.get("name"));
-					for(int i=0;i<=REDIS_DEFAULT_DB_SIZE;i++) {
-						refreshKeys((String)redisServerMap.get("name"), i);
-					}
-logCurrentTime("refreshServerTree(" + (String)redisServerMap.get("name"));
-					zTree = refreshServerTree((String)redisServerMap.get("name"), DEFAULT_DBINDEX);
-					// test limit flow System.out.println("yes permit");
-logCurrentTime("continue");
-				}
-logCurrentTime("finally {");
+				logCurrentTime("try {");
+								for(Map<String, Object> redisServerMap : RedisConfig.REDIS_SERVER_CACHE) {
+				logCurrentTime("refreshKeys(" + (String)redisServerMap.get("name"));
+									for(int i=0;i<=REDIS_DEFAULT_DB_SIZE;i++) {
+										refreshKeys((String)redisServerMap.get("name"), i);
+									}
+				logCurrentTime("refreshServerTree(" + (String)redisServerMap.get("name"));
+									zTree = refreshServerTree((String)redisServerMap.get("name"), DEFAULT_DBINDEX);
+									// test limit flow System.out.println("yes permit");
+				logCurrentTime("continue");
+								}
+				logCurrentTime("finally {");
 			} finally {
 				finishUpdate();
 			}
 		} else {
-			// test limit flow System.out.println("no permit");
+
 		}
 		return zTree;
 	}
@@ -79,7 +80,7 @@ logCurrentTime("finally {");
 	public void refreshAllKeys() {
 		boolean permit = getUpdatePermition();
 		try {
-			for(Map<String, Object> redisServerMap : RedisConfig.redisServerCache) {
+			for(Map<String, Object> redisServerMap : RedisConfig.REDIS_SERVER_CACHE) {
 				for(int i=0;i<=REDIS_DEFAULT_DB_SIZE;i++) {
 					refreshKeys((String)redisServerMap.get("name"), i);
 				}
@@ -90,19 +91,19 @@ logCurrentTime("finally {");
 	}
 	
 	private void refreshKeys(String serverName, int dbIndex) {
-		RedisTemplate redisTemplate = RedisConfig.redisTemplatesMap.get(serverName);
+		RedisTemplate redisTemplate = RedisConfig.REDIS_TEMPLATES_MAP.get(serverName);
 		initRedisKeysCache(redisTemplate, serverName, dbIndex);
 	}
 
 	private Set<ZNode> refreshServerTree(String serverName,
 			int dbIndex) {
 		 RedisZtreeUtil.refreshRedisNavigateZtree(serverName) ;
-		 return new TreeSet<ZNode>(redisNavigateZtree);
+		 return new TreeSet<ZNode>(REDIS_NAVIGATE_ZTREE);
 	}
 
 	@Override
 	public Set<RKey> getRedisKeys(Pagination pagination, String serverName, String dbIndex, String[] keyPrefixs, String queryKey, String queryValue) {
-		List<RKey> allRedisKeys = redisKeysListMap.get(serverName + DEFAULT_SEPARATOR + dbIndex);
+		List<RKey> allRedisKeys = REDIS_KEYS_LIST_MAP.get(serverName + DEFAULT_SEPARATOR + dbIndex);
 		
 		Set<RKey> resultRedisKeys = null;
 		
@@ -141,6 +142,21 @@ logCurrentTime("finally {");
 			pagination.setMaxentries(conformRedisKeys.size());
 		}
 		return resultRedisKeys;
+	}
+
+	@Override
+	public void delRedisKeysListMapByKeys(String serverName, int dbIndex, String deleteKeys) {
+		List<RKey> allRedisKeys = REDIS_KEYS_LIST_MAP.get(serverName + DEFAULT_SEPARATOR + dbIndex);
+		if(!CollectionUtils.isEmpty(allRedisKeys)){
+
+			for(int i = 0; i < allRedisKeys.size(); i++){
+
+				if(allRedisKeys.get(i).getKey().equals(deleteKeys)){
+					allRedisKeys.remove(i);
+					return;
+				}
+			}
+		}
 	}
 
 	private List<RKey> getQueryRedisKeys(List<RKey> allRedisKeys, String queryKey, String queryValue) {
@@ -182,7 +198,6 @@ logCurrentTime("finally {");
 		showType = ShowTypeEnum.valueOf(state);
 		switch(showType) {
 		case show:
-			//get redisKeys again if init keys with ShowTypeEnum.hide
 			refreshAllKeys();
 			break;
 		case hide:

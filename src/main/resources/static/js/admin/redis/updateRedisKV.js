@@ -65,7 +65,7 @@ $(document).ready(function() {
 				},
 				success : function(data) {
 					$(ctrLine).remove();
-					modelAlert(data);
+					modelAlert(data, 2000);
 				}
 			});
 			break;
@@ -83,7 +83,7 @@ $(document).ready(function() {
 				},
 				success : function(data) {
 					$(ctrLine).remove();
-					modelAlert(data);
+					modelAlert(data, 2000);
 				}
 			});
 			break;
@@ -103,7 +103,7 @@ $(document).ready(function() {
 				},
 				success : function(data) {
 					$(ctrLine).remove();
-					modelAlert(data);
+					modelAlert(data, 2000);
 				}
 			});
 			break;
@@ -123,7 +123,7 @@ $(document).ready(function() {
 				},
 				success : function(data) {
 					$(ctrLine).remove();
-					modelAlert(data);
+					modelAlert(data, 2000);
 				}
 			});
 			break;
@@ -143,7 +143,7 @@ $(document).ready(function() {
 				},
 				success : function(data) {
 					$(ctrLine).remove();
-					modelAlert(data);
+					modelAlert(data, 2000);
 				}
 			});
 			break;
@@ -174,7 +174,7 @@ $(document).ready(function() {
 					value: value,
 				},
 				success : function(data) {
-					modelAlert(data);
+					modelAlert(data, 2000);
 				}
 			});
 			break;
@@ -193,7 +193,7 @@ $(document).ready(function() {
 					value: value,
 				},
 				success : function(data) {
-					modelAlert(data);
+					modelAlert(data, 2000);
 				}
 			});
 			break;
@@ -212,7 +212,7 @@ $(document).ready(function() {
 					value: value,
 				},
 				success : function(data) {
-					modelAlert(data);
+					modelAlert(data, 2000);
 				}
 			});
 			break;
@@ -233,7 +233,7 @@ $(document).ready(function() {
 					member: member,
 				},
 				success : function(data) {
-					modelAlert(data);
+					modelAlert(data, 2000);
 				}
 			});
 			break;
@@ -254,7 +254,7 @@ $(document).ready(function() {
 					value: value,
 				},
 				success : function(data) {
-					modelAlert(data);
+					modelAlert(data, 2000);
 				}
 			});
 			break;

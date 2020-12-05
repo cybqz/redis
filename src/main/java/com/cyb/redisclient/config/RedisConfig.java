@@ -89,13 +89,13 @@ public abstract class RedisConfig extends ConfigValues implements Constant {
 		template.afterPropertiesSet();
 
 
-		RedisConfig.redisTemplatesMap.put(LOCAL_NAME, template);
+		RedisConfig.REDIS_TEMPLATES_MAP.put(LOCAL_NAME, template);
 		Map<String, Object> redisServerMap = new HashMap<String, Object>();
 		redisServerMap.put("name", LOCAL_NAME);
 		redisServerMap.put("host", host);
 		redisServerMap.put("port", port);
 		redisServerMap.put("password", password);
-		RedisConfig.redisServerCache.add(redisServerMap);
+		RedisConfig.REDIS_SERVER_CACHE.add(redisServerMap);
 
 		initRedisKeysCache(template, LOCAL_NAME);
 
@@ -165,11 +165,11 @@ public abstract class RedisConfig extends ConfigValues implements Constant {
 		Collections.sort(tempList);
 		CopyOnWriteArrayList<RKey> redisKeysList = new CopyOnWriteArrayList<RKey>(tempList);
 		if(redisKeysList.size()>0) {
-			redisKeysListMap.put(serverName+DEFAULT_SEPARATOR+dbIndex, redisKeysList);
+			REDIS_KEYS_LIST_MAP.put(serverName+DEFAULT_SEPARATOR+dbIndex, redisKeysList);
 		}
 	}
 	
 	protected static void logCurrentTime(String code) {
-		log.debug("code:"+code+"当前时间:" + System.currentTimeMillis());
+		log.info("code:"+code+"当前时间:" + System.currentTimeMillis());
 	}
 }

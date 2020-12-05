@@ -21,4 +21,5 @@ public interface ViewService {
 
 	void refreshAllKeys();
 
+	void delRedisKeysListMapByKeys(String serverName, int dbIndex, String deleteKeys);
 }

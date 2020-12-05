@@ -14,7 +14,7 @@ public class RedisTemplateFactory extends RedisConfig {
 	private static Log log = LogFactory.getLog(RedisTemplateFactory.class);
 	
 	protected static RedisTemplate<String, Object> getRedisTemplate(String redisName) {
-		RedisTemplate<String, Object> redisTemplate = redisTemplatesMap.get(redisName);
+		RedisTemplate<String, Object> redisTemplate = REDIS_TEMPLATES_MAP.get(redisName);
 		if(redisTemplate==null) {
 			log.error("redisTemplate==null" + ". had not connected to " + redisName + " this redis server now.");
 			throw new RedisConnectionException("had not connected to " + redisName + " this redis server now.");

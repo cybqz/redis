@@ -94,9 +94,9 @@
 <script src="<%=basePath%>/static/js/admin/redis/addRedisKV.js"></script>
 <script src="<%=basePath%>/static/js/admin/redis/updateRedisKV.js"></script>
 <script>
-	var serverName = '${serverName}';
-	var dbIndex = '${dbIndex}';
-	var basePath = '${basePath}';
+	let serverName = '${serverName}';
+	let dbIndex = '${dbIndex}';
+	let basePath = '${basePath}';
 
 	function pageselectCallback(page_id, jq) {
     }
@@ -115,42 +115,36 @@
         }); 
 		
 		$(".query_a").on("click", function() {
-			var query_a_ch = $(this).text();
-			var query_a_en = $(this).attr("value1");
+			let query_a_ch = $(this).text();
+			let query_a_en = $(this).attr("value1");
 			$("#queryLabel_btn").text(query_a_ch);
 			$("#query_input").attr("name", query_a_en);
 		});
 		
 		$("#query_btn").on("click", function() {
-			var queryKey = $("#query_input").attr("name");
-			var queryValue = $("#query_input").val();
-			var url = basePath + '/redis/stringList/' + serverName + '/' + dbIndex + '?queryKey='+queryKey + '&queryValue=' + queryValue;
-			var encodeUrl = encodeURI(url);
+			let queryKey = $("#query_input").attr("name");
+			let queryValue = $("#query_input").val();
+			let url = basePath + '/redis/stringList/' + serverName + '/' + dbIndex + '?queryKey='+queryKey + '&queryValue=' + queryValue;
+			let encodeUrl = encodeURI(url);
 			window.location.href = encodeUrl;
 		});
 		
-		$(".back_btn").on("click", function() {
-			window.location.href = basePath + '/redis/stringList/' + serverName + '/' + dbIndex;
-		});
-		
-		
 		$(".delete_btn").on("click", function() {
-			var operator = $(this).attr("value1");
-			var url = "<%=basePath%>/redis/delKV";
+			let operator = $(this).attr("value1");
+			let url = "<%=basePath%>/redis/delKV";
 			
-			var deleteKeys = '';
+			let deleteKeys = '';
 			
 			$("#listTable").find("input:checkbox[name='redisKey']:checked").each(function(){
-				var key = $(this).attr("value1");
+				let key = $(this).attr("value1");
 				deleteKeys = deleteKeys + "," +key;
 			})
 			
 			deleteKeys = deleteKeys.substring(1);
 			
 			if(deleteKeys == '') {
-				$("#model_title").text("warning");
-				$("#model_content").text("please choose one to delete");
-				$('#myModal').modal();
+				let backUrl = basePath + '/redis/stringList/' + serverName + '/' + dbIndex;
+				modelShow("警告", "请至少选择一个！", backUrl, 2000)
 				return;
 			}
 			
@@ -164,14 +158,14 @@
 					deleteKeys: deleteKeys,
 				},
 				success: function(data) {
-					modelAlert(data);
+					modelAlert(data, 2000);
 				}
 			});
 		});
 		
 		$(".changeShowType_btn").on("click", function() {
-			var newState = $(this).attr("value1");
-			var url = "<%=basePath%>/redis/changeShowType";
+			let newState = $(this).attr("value1");
+			let url = "<%=basePath%>/redis/changeShowType";
 			$.ajax({
 				type: "post", 
 				url: url,
@@ -180,7 +174,7 @@
 					state: newState,
 				},
 				success: function(data) {
-					modelAlert(data);
+					modelAlert(data, 2000);
 				}
 			})
 		})

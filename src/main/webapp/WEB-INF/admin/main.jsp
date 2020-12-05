@@ -56,7 +56,7 @@
 						mode: value1,
 					},
 					success: function(data) {
-						modelAlert(data);
+						modelAlert(data, 2000);
 					}
 				})
 			});

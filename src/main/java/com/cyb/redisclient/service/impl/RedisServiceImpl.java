@@ -87,7 +87,7 @@ public class RedisServiceImpl extends RedisConfig implements RedisService, WebCo
 	}
 
 	private String getDataType(String serverName, int dbIndex, String key) {
-		RedisTemplate redisTemplate = RedisConfig.redisTemplatesMap.get(serverName);
+		RedisTemplate redisTemplate = RedisConfig.REDIS_TEMPLATES_MAP.get(serverName);
 		RedisConnection connection = RedisConnectionUtils.getConnection(redisTemplate.getConnectionFactory());
 		connection.select(dbIndex);
 		DataType dataType = connection.type(key.getBytes());
@@ -96,7 +96,7 @@ public class RedisServiceImpl extends RedisConfig implements RedisService, WebCo
 	}
 	
 	private Object getKV(String serverName, int dbIndex, String key) {
-		RedisTemplate redisTemplate = RedisConfig.redisTemplatesMap.get(serverName);
+		RedisTemplate redisTemplate = RedisConfig.REDIS_TEMPLATES_MAP.get(serverName);
 		RedisConnection connection = RedisConnectionUtils.getConnection(redisTemplate.getConnectionFactory());
 		connection.select(dbIndex);
 		DataType dataType = connection.type(key.getBytes());
