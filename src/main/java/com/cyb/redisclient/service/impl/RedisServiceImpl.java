@@ -22,27 +22,30 @@ public class RedisServiceImpl extends RedisConfig implements RedisService, WebCo
 	private RedisDao redisDao;
 	
 	@Override
-	public void addKV(String serverName, int dbIndex, String dataType,
-			String key, 
-			String[] values, double[] scores, String[] members, String[] fields) {
-		
+	public Long addKV(
+			String serverName, int dbIndex, String dataType,
+			String key, String[] values, double[] scores,
+			String[] members, String[] fields) {
+
+		Long result = null;
 		switch(dataType) {
 		case "STRING":
-			redisDao.addSTRING(serverName, dbIndex, key, values[0]);
+			result = redisDao.addSTRING(serverName, dbIndex, key, values[0]);
 			break;
 		case "LIST":
-			redisDao.addLIST(serverName, dbIndex, key, values);
+			result = redisDao.addLIST(serverName, dbIndex, key, values);
 			break;
 		case "SET":
-			redisDao.addSET(serverName, dbIndex, key, values);
+			result = redisDao.addSET(serverName, dbIndex, key, values);
 			break;
 		case "ZSET":
-			redisDao.addZSET(serverName, dbIndex, key, scores, members);
+			result = redisDao.addZSET(serverName, dbIndex, key, scores, members);
 			break;
 		case "HASH":
-			redisDao.addHASH(serverName, dbIndex, key, fields, values);
+			result = redisDao.addHASH(serverName, dbIndex, key, fields, values);
 			break;
 		}
+		return result;
 	}
 	@Override
 	public WorkcenterResult getKV(String serverName, int dbIndex, String dataType, String key) {
@@ -122,9 +125,8 @@ public class RedisServiceImpl extends RedisConfig implements RedisService, WebCo
 		return values;
 	}
 	@Override
-	public void delKV(String serverName, int dbIndex, String deleteKeys) {
-		redisDao.delRedisKeys(serverName, dbIndex, deleteKeys);
-		return;
+	public Long delKV(String serverName, int dbIndex, String deleteKeys) {
+		return redisDao.delRedisKeys(serverName, dbIndex, deleteKeys);
 	}
 	
 }

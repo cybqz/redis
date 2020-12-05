@@ -20,10 +20,16 @@ public class RedisDao extends RedisConfig {
 	@Autowired
 	RedisTemplateFactory redisTemplateFactory;
 
-	public void addSTRING(String serverName, int dbIndex, String key, String value) {
-		RedisTemplate<String, Object> redisTemplate = redisTemplateFactory.getRedisTemplate(serverName);
-		redisConnectionDbIndex.set(dbIndex);
-		redisTemplate.opsForValue().set(key, value);
+	public Long addSTRING(String serverName, int dbIndex, String key, String value) {
+		try {
+			RedisTemplate<String, Object> redisTemplate = redisTemplateFactory.getRedisTemplate(serverName);
+			redisConnectionDbIndex.set(dbIndex);
+			redisTemplate.opsForValue().set(key, value);
+			return 200L;
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return 500L;
 	}
 	
 	public Long addLIST(String serverName, int dbIndex, String key, String[] values) {
@@ -39,7 +45,7 @@ public class RedisDao extends RedisConfig {
 		return redisTemplate.opsForSet().add(key, values);
 	}
 
-	public void addZSET(String serverName, int dbIndex, String key,
+	public Long addZSET(String serverName, int dbIndex, String key,
 			double[] scores, String[] members) {
 		RedisTemplate<String, Object> redisTemplate = redisTemplateFactory.getRedisTemplate(serverName);
 		redisConnectionDbIndex.set(dbIndex);
@@ -73,21 +79,28 @@ public class RedisDao extends RedisConfig {
 				}
 			});
 		}
-		redisTemplate.opsForZSet().add(key, zset);
+		return redisTemplate.opsForZSet().add(key, zset);
 	}
 	
-	public void addHASH(String serverName, int dbIndex, String key,
+	public Long addHASH(String serverName, int dbIndex, String key,
 			String[] fields, String[] values) {
-		RedisTemplate<String, Object> redisTemplate = redisTemplateFactory.getRedisTemplate(serverName);
-		redisConnectionDbIndex.set(dbIndex);
-		Map<String, String> hashmap = new HashMap<String, String>();
-		
-		for(int i=0;i<fields.length;i++) {
-			String field = fields[i];
-			String value = values[i];
-			hashmap.put(field, value);
+		try {
+			RedisTemplate<String, Object> redisTemplate = redisTemplateFactory.getRedisTemplate(serverName);
+			redisConnectionDbIndex.set(dbIndex);
+			Map<String, String> hashmap = new HashMap<String, String>();
+
+			for(int i=0;i<fields.length;i++) {
+				String field = fields[i];
+				String value = values[i];
+				hashmap.put(field, value);
+			}
+			redisTemplate.opsForHash().putAll(key, hashmap);
+
+			return 200L;
+		}catch (Exception e){
+			e.printStackTrace();
 		}
-		redisTemplate.opsForHash().putAll(key, hashmap);
+		return 500L;
 	}
 
 	public Object getSTRING(String serverName, int dbIndex, String key) {
